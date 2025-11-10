@@ -213,6 +213,25 @@ body.light .thumb {
 
   .trusted{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
   .trusted img{height:48px;opacity:.95;filter:grayscale(0.05)}
+  /* --- Dark Mode Fix for Trusted Section --- */
+body.dark #trusted {
+  background: linear-gradient(180deg, #04101a, #091b28) !important; /* dark navy gradient */
+}
+
+body.dark #trusted .section-title,
+body.dark #trusted h3 {
+  color: #e6f3ff !important; /* bright light-blue text */
+}
+
+body.dark #trusted .muted {
+  color: #a6c4d9 !important; /* softer light gray-blue for paragraph text */
+}
+
+body.dark .trusted img {
+  filter: brightness(1.2) !important; /* make logos brighter */
+  opacity: 1 !important;
+}
+
 
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .form input,.form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d8e8f2;background:white;transition:background .35s,color .35s,border .35s}
