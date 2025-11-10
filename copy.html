@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Biz Marine — Professional Marine Logistics</title>
+<meta name="description" content="Biz Marine — vessel chartering, offshore logistics, fleet operations." />
+
+<style>
+  :root{
+    --accent: #0b5f8a;
+    --accent-2:#0d8db8;
+    --bg:#f6fbff;
+    --nav-bg: rgba(255,255,255,0.85);
+    --card: rgba(255,255,255,0.85);
+    --muted: #6b7a86;
+    --dark-hero-overlay: rgba(4,10,25,0.65);
+    --max-w:1200px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#f6fbff 0%, #edf7fb 100%);color:#072033;line-height:1.45;transition:background .35s,color .35s}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+
+  /* header */
+ /* header */
+header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 12px;
+  z-index: 80;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 28px;
+  margin: 0 20px;
+  border-radius: 12px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 24px rgba(12, 40, 60, 0.06);
+  transition: background .35s, box-shadow .35s;
+  max-width: 1100px; /* keeps header centered */
+  width: 100%;
+}
+
+/* brand */
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+/* nav */
+nav ul {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+nav a {
+  font-weight: 500;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+.cta {
+  background: var(--accent);
+  padding: 8px 16px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(11, 95, 138, 0.14);
+  transition: transform 0.3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+}
+
+/* toggle */
+.toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1a263b, #0b5f8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.toggle svg {
+  width: 14px;
+  fill: var(--accent);
+}
+
+body.light .toggle {
+  background: linear-gradient(135deg, #b1dcff, #7bbef4);
+}
+
+body.light .thumb {
+  left: 27px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
+  /* toggle pill */
+  .toggle{width:82px;height:36px;border-radius:999px;display:inline-flex;align-items:center;padding:4px;background:linear-gradient(90deg,#bfe6ff,#dff6ff);cursor:pointer;position:relative;transition:background .35s}
+  .toggle .thumb{position:absolute;left:6px;width:28px;height:28px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(11,95,138,0.12);transition:all .35s}
+  .toggle svg{width:18px;height:18px;fill:var(--accent);transition:fill .35s}
+  .toggle.dark{background:linear-gradient(90deg,#0a2b43,#04202b)}
+  .toggle.dark .thumb{transform:translateX(46px);background:var(--accent)}
+  body.dark .toggle svg path{fill:#fff}
+
+  /* hero */
+  .hero{position:relative;height:78vh;min-height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:8px;transition:background .35s}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none}
+  .slide.active{opacity:1;z-index:1;pointer-events:auto}
+  .slide video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.95)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,20,34,0.35),rgba(2,20,34,0.6));z-index:1;transition:background .35s}
+  .hero.light::after{background:linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.18))}
+  .hero-overlay{position:relative;z-index:2;padding:48px;max-width:1100px;margin:auto;text-align:left}
+  .hero h1{font-size:40px;margin:0 0 14px;color:#fff;letter-spacing:-0.5px;text-shadow:0 6px 28px rgba(0,0,0,0.45);transition:color .35s,text-shadow .35s}
+  .hero p.lead{color:rgba(230,245,255,0.9);margin:0 0 18px;font-size:17px;transition:color .35s}
+  .hero-card{display:flex;gap:18px;align-items:center;background:rgba(255,255,255,0.06);backdrop-filter:blur(8px);padding:16px;border-radius:12px;transition:background .35s,box-shadow .35s,color .35s}
+  .hero.light h1{color:#052033;text-shadow:none}
+  .hero.light p.lead{color:#234558}
+  .hero.light .hero-card{background:rgba(255,255,255,0.95);box-shadow:0 6px 18px rgba(12,40,60,0.05)}
+  .hero-card .muted{font-size:13px;color:rgba(230,245,255,0.85)}
+  .hero-card .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+  .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#eef7fb}
+  .btn-primary{background:var(--accent);color:#fff}
+
+  .dots{position:absolute;left:20px;bottom:28px;z-index:30;display:flex;flex-direction:column;gap:10px}
+  .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer}
+  .dot.active{background:var(--accent);transform:scale(1.2)}
+
+  .ship-wrap{position:fixed;right:6vw;bottom:6vh;z-index:30;pointer-events:none}
+  .ship-svg{width:300px;max-width:34vw;display:block;filter:drop-shadow(0 14px 32px rgba(0,0,0,0.45))}
+
+  section{padding:80px 0}
+  .section-title{text-align:center;margin-bottom:28px}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+  .card{background:white;border-radius:12px;padding:18px;box-shadow:0 6px 24px rgba(12,40,60,0.04);transition:background .35s,box-shadow .35s,color .35s}
+  .card h3{margin-top:0}
+  .banner{height:220px;border-radius:12px;background-size:cover;background-position:center;display:block;overflow:hidden}
+
+  .work-steps{display:flex;gap:18px;flex-wrap:wrap;align-items:stretch}
+  .step{flex:1;min-width:220px;background:white;padding:18px;border-radius:12px;box-shadow:0 8px 28px rgba(6,30,45,0.05);transition:background .35s,box-shadow .35s,color .35s}
+  .step .icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;margin-bottom:12px}
+
+  .trusted{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .trusted img{height:48px;opacity:.95;filter:grayscale(0.05)}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .form input,.form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d8e8f2;background:white;transition:background .35s,color .35s,border .35s}
+  .form button{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+
+  footer{padding:34px 20px;text-align:center;color:#5d7a87;background:linear-gradient(180deg,#f6fbff,#eef9ff);transition:background .35s,color .35s}
+
+  /* --- Dark mode overrides --- */
+  body.dark{background:linear-gradient(180deg,#071621 0%,#031017 100%);color:#e6f3ff}
+  body.dark .topbar{background:rgba(12,28,45,0.75);box-shadow:0 6px 24px rgba(0,0,0,0.3)}
+  body.dark .hero::after{background:linear-gradient(180deg,rgba(2,15,28,0.6),rgba(2,10,20,0.8))}
+  body.dark .hero h1{color:#e6f3ff;text-shadow:0 4px 20px rgba(0,0,0,0.55)}
+  body.dark .hero p.lead{color:#bcd8ea}
+  body.dark .hero-card{background:rgba(8,25,38,0.75);box-shadow:0 6px 24px rgba(0,0,0,0.3)}
+  body.dark .card,body.dark .step,body.dark form.card{background:rgba(10,25,38,0.9);color:#e6f3ff;box-shadow:0 6px 24px rgba(0,0,0,0.45)}
+  body.dark .muted{color:#a6c4d9!important}
+  body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e8}
+
+  @media (max-width:1000px){.grid{grid-template-columns:1fr 1fr}.work-steps{flex-direction:column}.ship-wrap{display:none}.contact-grid{grid-template-columns:1fr}}
+  @media (max-width:640px){.hero h1{font-size:26px}.hero-overlay{padding:20px}.topbar{margin:0 8px;padding:8px}.dots{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar container">
+    <div class="brand">
+      <div class="logo">BM</div>
+      <div>
+        <div style="font-weight:700">Biz Marine</div>
+        <div style="font-size:12px;color:var(--muted)">Offshore | Charter | Fleet Ops</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#fleet">Fleet</a></li>
+        <li><a href="#how">How We Work</a></li>
+        <li><a href="#trusted">Trusted</a></li>
+        <li><a href="#contact" class="cta">Contact</a></li>
+      </ul>
+    </nav>
+    <div id="themeToggle" class="toggle" title="Switch theme" aria-label="Toggle day night">
+      <div class="thumb" id="toggleThumb" role="button" aria-pressed="false">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M464 256c0 0-28.9 48-56 48H104c-27.1 0-56-48-56-48C61 180 110 112 256 112s195 68 208 144z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="slide active" data-i="0">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="public/assets/videos/Drone-shot-Racon.webm" type="video/webm">
+    </video>
+  </div>
+  <div class="slide" data-i="1">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="public/assets/videos/Encompassing-seismic-support-services.webm" type="video/webm">
+    </video>
+  </div>
+  <div class="hero-overlay container">
+    <h1>Reliable Marine Logistics & Vessel Chartering</h1>
+    <p class="lead">Offshore logistics, fleet operations and project support — safely, efficiently, and worldwide.</p>
+    <div class="hero-card">
+      <div>
+        <div style="font-weight:700">Vessels Available</div>
+        <div class="muted" style="font-size:13px">Tugs, Barges, Supply Vessels, Offshore Support</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+        <button class="btn btn-outline" onclick="location.href='#services'">Our Services</button>
+        <button class="btn btn-primary" onclick="location.href='#contact'">Enquire Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="dots" id="dots">
+    <div class="dot active" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+  </div>
+</section>
+
+<div class="ship-wrap" aria-hidden="true">
+  <svg class="ship-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(20,60) scale(.9)">
+      <rect x="0" y="120" width="520" height="60" rx="20" fill="#0b5f8a"/>
+      <rect x="40" y="60" width="140" height="80" rx="8" fill="#063b50"/>
+      <rect x="200" y="20" width="40" height="120" fill="#0b5f8a"/>
+      <rect x="248" y="40" width="28" height="100" fill="#0b5f8a"/>
+    </g>
+  </svg>
+</div>
+
+<section id="services" class="container section">
+  <h2 class="section-title">Our Services</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="banner" style="background-image:url('public/assets/images/A\ large\ container\ ship.jpg')"></div>
+      <h3>Vessel Chartering</h3>
+      <p>Short & long-term charters: tugs, supply vessels, barges and specialised units for projects.</p>
+    </div>
+    <div class="card">
+      <div class="banner" style="background-image:url('public/assets/images/a2.jpg')"></div>
+      <h3>Offshore Logistics</h3>
+      <p>Project logistics, crew transfers, port coordination and equipment transport services.</p>
+    </div>
+    <div class="card">
+      <div class="banner" style="background-image:url('public/assets/images/b1.jpg')"></div>
+      <h3>Seismic & Project Support</h3>
+      <p>Operational support for seismic, survey and offshore maintenance projects.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fleet" class="section" style="background:linear-gradient(180deg,#eef9ff,#f6fbff)">
+  <div class="container">
+    <h2 class="section-title">Fleet Highlights</h2>
+    <div class="grid">
+      <div class="card"><h3>Offshore Supply Vessels</h3><p>High-capacity vessels for offshore supply and logistics. Onboard safety and cargo systems verified.</p></div>
+      <div class="card"><h3>Tug & Barge Units</h3><p>Harbor and coastal towing with modern tug units and partnered barges for heavy lifting.</p></div>
+      <div class="card"><h3>Charter Partners</h3><p>Access to vetted third-party fleet and vessel management for project scale-ups.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="container section">
+  <h2 class="section-title">How We Work</h2>
+  <p style="text-align:center;color:var(--muted);max-width:820px;margin:0 auto 28px">We focus on safety, planning and clear communication.</p>
+  <div class="work-steps">
+    <div class="step"><div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M7 3v4M17 3v4" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><h4>1. Plan & Survey</h4><p class="muted">Detailed project survey, route planning and risk analysis before mobilisation.</p></div>
+    <div class="step"><div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M2 12h20l-2 6H4z" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><h4>2. Mobilise</h4><p class="muted">Vessel readiness checks, fuel & stores, crew mobilisation and permits cleared.</p></div>
+    <div class="step"><div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M12 3v18" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><h4>3. Execute & Support</h4><p class="muted">On-site coordination, safety reporting and real-time updates to client.</p></div>
+  </div>
+</section>
+
+<section id="trusted" class="section" style="background:linear-gradient(180deg,#f0fbff,#f6fbff)">
+  <div class="container">
+    <h2 class="section-title">Why Clients Trust Us</h2>
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:18px">
+      <div class="card" style="max-width:420px"><h3>Safety-first operations</h3><p class="muted">Certified HSE processes, modern equipment and trained crew for every voyage.</p></div>
+      <div class="card" style="max-width:420px"><h3>Experienced Team</h3><p class="muted">Decades of combined experience in chartering, marine logistics, and fleet ops.</p></div>
+    </div>
+    <div class="trusted">
+      <img src="public/assets/images/l2.png"><img src="public/assets/images/l3-removebg-preview.png"><img src="public/assets/images/l4.png">
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="container section">
+  <h2 class="section-title">Contact Us</h2>
+  <div class="contact-grid">
+    <div class="card" style="padding:20px"><h3>Get in touch</h3><p class="muted">BizMarine.co.in<br>+91 22 4783 6207<br>Surat, Gujarat</p><p class="muted">Office hours: Mon–Fri 09:30–18:00</p></div>
+    <form class="form card" onsubmit="event.preventDefault(); alert('Message sent (demo)');" style="padding:20px">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>© <strong>Biz Marine</strong> — Offshore | Charter | Fleet Operations</footer>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dot')];let i=0,t;function show(n){slides.forEach((s,x)=>s.classList.toggle('active',x===n));dots.forEach((d,x)=>d.classList.toggle('active',x===n));slides.forEach((s,x)=>{const v=s.querySelector('video');if(v){x===n?v.play().catch(()=>{}):(v.pause(),v.currentTime=0)}});i=n;}function next(){show((i+1)%slides.length);}dots.forEach(d=>d.addEventListener('click',e=>{show(+e.currentTarget.dataset.i);reset();}));function reset(){clearInterval(t);t=setInterval(next,7000);}show(0);reset();document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(t);else reset();});
+})();
+(function(){
+  const toggle=document.getElementById('themeToggle'),body=document.body;
+  const saved=localStorage.getItem('racon_theme');const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let dark=saved?saved==='dark':prefersDark;
+  function apply(d){d?(body.classList.add('dark'),toggle.classList.add('dark'),localStorage.setItem('racon_theme','dark')):(body.classList.remove('dark'),toggle.classList.remove('dark'),localStorage.setItem('racon_theme','light'));}apply(dark);
+  toggle.addEventListener('click',()=>{dark=!body.classList.contains('dark');apply(dark);});
+})();
+(function(){
+  const s=document.querySelector('.ship-wrap');if(!s)return;let w=innerWidth,h=innerHeight;
+  addEventListener('mousemove',e=>{const nx=(e.clientX/w-.5),ny=(e.clientY/h-.5);s.style.transform=`translate3d(${nx*12}px,${ny*14}px,0)`;});
+  addEventListener('resize',()=>{w=innerWidth;h=innerHeight;});
+})();
+</script>
+</body>
+</html>
