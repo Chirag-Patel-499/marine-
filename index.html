@@ -6,6 +6,10 @@
 <title>Biz Marine — Professional Marine Logistics</title>
 <meta name="description" content="Biz Marine — vessel chartering, offshore logistics, fleet operations." />
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
 <style>
   :root{
     --accent: #0b5f8a;
@@ -214,6 +218,80 @@ body.light .thumb {
   .form input,.form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d8e8f2;background:white;transition:background .35s,color .35s,border .35s}
   .form button{background:var(--accent);color:white;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
 
+.map-trigger {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.map-trigger button {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(11,95,138,0.2);
+  transition: all 0.3s ease;
+}
+
+.map-trigger button:hover {
+  transform: translateY(-2px);
+  background: var(--accent-2);
+}
+
+/* Popup */
+#mapModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 10, 20, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-content {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ✅ Final map inside popup */
+#miniMap {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+#closeMapBtn {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #03314a;
+  font-weight: bold;
+}
+
+body.dark .map-content {
+  background: rgba(10,25,38,0.95);
+  color: #e6f3ff;
+}
+
+body.dark #closeMapBtn { 
+  color: #bcd8ea; 
+}
+
+
+
+
   footer{padding:34px 20px;text-align:center;color:#5d7a87;background:linear-gradient(180deg,#f6fbff,#eef9ff);transition:background .35s,color .35s}
 
   /* --- Dark mode overrides --- */
@@ -391,6 +469,22 @@ body.light .thumb {
   </div>
 </section>
 
+<!-- Map Popup Trigger -->
+<div class="map-trigger">
+  <button id="openMapBtn">🌍 View Operations Map</button>
+</div>
+
+<!-- Popup Modal -->
+<div id="mapModal">
+  <div class="map-content">
+    <span id="closeMapBtn">&times;</span>
+    <h3>Biz Marine Operational Routes</h3>
+    <div id="miniMap"></div>
+  </div>
+</div>
+
+
+
 <footer>© <strong>Biz Marine</strong> — Offshore | Charter | Fleet Operations</footer>
 
 <script>
@@ -410,6 +504,55 @@ body.light .thumb {
   addEventListener('resize',()=>{w=innerWidth;h=innerHeight;});
 })();
 </script>
+
+<script>
+window.map = L.map('miniMap', {
+  center: [21.17, 72.83],
+  zoom: 3,
+  zoomControl: false,
+  attributionControl: false
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 10,
+}).addTo(window.map);
+
+L.marker([21.17, 72.83]).addTo(window.map).bindPopup("Biz Marine HQ — Surat");
+L.marker([25.20, 55.27]).addTo(window.map).bindPopup("Dubai Port");
+L.polyline([
+  [21.17, 72.83],
+  [25.20, 55.27]
+], {color: '#0b5f8a', weight: 3, opacity: 0.8, dashArray: '5, 6'}).addTo(window.map);
+
+</script>
+
+
+<script>
+  const modal = document.getElementById('mapModal');
+  const btn = document.getElementById('openMapBtn');
+  const closeBtn = document.getElementById('closeMapBtn');
+
+  btn.onclick = function() {
+    modal.style.display = 'flex';
+    setTimeout(() => {
+      if (window.map) {
+        window.map.invalidateSize(); // adjust map size in popup
+      }
+    }, 200);
+  };
+
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+  };
+
+  window.onclick = function(e) {
+    if (e.target === modal) modal.style.display = 'none';
+  };
+</script>
+
+
+
+
 </body>
 </html>
 
