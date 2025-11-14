@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -223,8 +226,38 @@ section{padding:80px 0}
 .step{flex:1;min-width:220px;background:white;padding:18px;border-radius:12px;box-shadow:0 8px 28px rgba(6,30,45,0.05);transition:background .35s,box-shadow .35s,color .35s}
 .step .icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;margin-bottom:12px}
 
-.trusted{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
-.trusted img{height:48px;opacity:.95;filter:grayscale(0.05)}
+
+
+.trusted-wrapper {
+  width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 10px 0;
+  position: relative;
+}
+
+/* Track must be long enough to loop without jump */
+.trusted {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  width: max-content;                /* IMPORTANT */
+  animation: scrollLogos 20s linear infinite;
+}
+
+.trusted img {
+  height: 50px;
+  opacity: 0.95;
+  flex-shrink: 0;                    /* IMPORTANT */
+}
+
+@keyframes scrollLogos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50%)); }   /* exact half track */
+}
+
+
+
 
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .form input,.form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d8e8f2;background:white;transition:background .35s,color .35s,border .35s}
@@ -258,6 +291,43 @@ section{padding:80px 0}
   margin-bottom: 12px;
 }
 
+
+#testimonials {
+  background: var(--section-bg);
+  color: var(--text-color);
+  padding: 60px 0;
+  text-align: center;
+}
+
+#testimonials .scroll-box {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  max-width: 700px;
+  margin: auto;
+}
+
+#testimonials .scroll-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#testimonials .card {
+  background: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: 0 4px 10px var(--shadow);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#testimonials .muted {
+  color: var(--muted-color);
+  font-size: 14px;
+  display: block;
+  margin-top: 6px;
+}
 
 
 .map-trigger {
@@ -412,38 +482,43 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
       </div>
     </div>
   </div>
-</header>
+</header>  
+
 
 <section class="hero" id="hero">
-  <div class="slide active" data-i="0">
+
+  {% for s in slides %}
+  <div class="slide {% if forloop.first %}active{% endif %}" data-i="{{ forloop.counter0 }}">
     <video autoplay muted loop playsinline preload="metadata">
-      <source src="public/assets/videos/Drone-shot-Racon.webm" type="video/webm">
+      <source src="{{ s.video.url }}" type="video/webm">
     </video>
   </div>
-  <div class="slide" data-i="1">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="public/assets/videos/Encompassing-seismic-support-services.webm" type="video/webm">
-    </video>
-  </div>
+  {% endfor %}
+
   <div class="hero-overlay container">
-    <h1>Reliable Marine Logistics & Vessel Chartering</h1>
-    <p class="lead">Offshore logistics, fleet operations and project support — safely, efficiently, and worldwide.</p>
+    <h1>{{ hero.title }}</h1>
+    <p class="lead">{{ hero.subtitle }}</p>
+
     <div class="hero-card">
       <div>
-        <div style="font-weight:700">Vessels Available</div>
-        <div class="muted" style="font-size:13px">Tugs, Barges, Supply Vessels, Offshore Support</div>
+        <div style="font-weight:700">{{ hero.card_title }}</div>
+        <div class="muted" style="font-size:13px">{{ hero.card_text }}</div>
       </div>
+
       <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
         <button class="btn btn-outline" onclick="location.href='#services'">Our Services</button>
         <button class="btn btn-primary" onclick="location.href='#contact'">Enquire Now</button>
       </div>
     </div>
   </div>
+
   <div class="dots" id="dots">
-    <div class="dot active" data-i="0"></div>
-    <div class="dot" data-i="1"></div>
+    {% for s in slides %}
+    <div class="dot {% if forloop.first %}active{% endif %}" data-i="{{ forloop.counter0 }}"></div>
+    {% endfor %}
   </div>
 </section>
+
 
 <div class="ship-wrap" aria-hidden="true">
   <svg class="ship-svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
@@ -459,43 +534,48 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
 <section id="services" class="container section" data-aos="fade-up">
   <h2 class="section-title">Our Services</h2>
   <div class="grid">
-    <div class="card">
-      <div class="banner" style="background-image:url('public/assets/images/A\ large\ container\ ship.jpg')"></div>
-      <h3>Vessel Chartering</h3>
-      <p>Short & long-term charters: tugs, supply vessels, barges and specialised units for projects.</p>
-    </div>
-    <div class="card">
-      <div class="banner" style="background-image:url('public/assets/images/a2.jpg')"></div>
-      <h3>Offshore Logistics</h3>
-      <p>Project logistics, crew transfers, port coordination and equipment transport services.</p>
-    </div>
-    <div class="card">
-      <div class="banner" style="background-image:url('public/assets/images/b1.jpg')"></div>
-      <h3>Seismic & Project Support</h3>
-      <p>Operational support for seismic, survey and offshore maintenance projects.</p>
-    </div>
+    {% for s in services %}
+      <div class="card">
+        <div class="banner" style="background-image:url('{{ s.image.url }}')"></div>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.description }}</p>
+      </div>
+    {% endfor %}
   </div>
 </section>
+
 
 <section id="fleet" class="section" data-aos="fade-up">
   <div class="container">
     <h2 class="section-title">Fleet Highlights</h2>
     <div class="grid">
-      <div class="card"><h3>Offshore Supply Vessels</h3><p>High-capacity vessels for offshore supply and logistics. Onboard safety and cargo systems verified.</p></div>
-      <div class="card"><h3>Tug & Barge Units</h3><p>Harbor and coastal towing with modern tug units and partnered barges for heavy lifting.</p></div>
-      <div class="card"><h3>Charter Partners</h3><p>Access to vetted third-party fleet and vessel management for project scale-ups.</p></div>
+  {% for f in fleet %}
+    <div class="card">
+      <h3>{{ f.title }}</h3>
+      <p>{{ f.description }}</p>
     </div>
+  {% endfor %}
+</div>
+
   </div>
 </section>
 
 <section id="team" class="container section" data-aos="fade-up">
   <h2 class="section-title">Meet Our Crew</h2>
+
   <div class="grid">
-    <div class="card"><img src="public/assets/images/captain.jpg" style="width:100%;border-radius:8px;"><h3>Capt. Arjun Mehta</h3><p class="muted">Operations Head</p></div>
-    <div class="card"><img src="public/assets/images/fleet.jpeg" style="width:100%;border-radius:8px;"><h3>Riya Desai</h3><p class="muted">Fleet Manager</p></div>
-    <div class="card"><img src="public/assets/images/Supervisor.jpeg" style="width:100%;border-radius:8px;"><h3>Rahul Singh</h3><p class="muted">Safety Supervisor</p></div>
+    {% for member in team %}
+      <div class="card">
+        <img src="{{ member.photo.url }}" style="width:100%;border-radius:8px;">
+        <h3>{{ member.name }}</h3>
+        <p class="muted">{{ member.role }}</p>
+      </div>
+    {% empty %}
+      <p>No team members added yet.</p>
+    {% endfor %}
   </div>
 </section>
+
 
 <section id="how" class="container section" data-aos="fade-up">
   <h2 class="section-title">How We Work</h2>
@@ -510,25 +590,29 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
 <section id="testimonials" class="section" data-aos="fade-up">
   <div class="container">
     <h2 class="section-title">Client Feedback</h2>
-    <div class="card" style="max-width:700px;margin:auto;text-align:center;">
-      <p>“Biz Marine supported our offshore survey with precision and professionalism.”</p>
-      <div class="muted">— Global Oceanic Ltd.</div>
+
+    <div class="scroll-box">
+      <div class="scroll-content">
+
+        {% for t in testimonials %}
+        <div class="card">
+          “{{ t.feedback }}”
+          <br>
+          <span class="muted">— {{ t.client_name }}</span>
+        </div>
+        {% empty %}
+        <p>No testimonials added yet.</p>
+        {% endfor %}
+
+      </div>
     </div>
   </div>
 </section>
 
-<section id="trusted" class="section" data-aos="fade-up">
-  <div class="container">
-    <h2 class="section-title">Why Clients Trust Us</h2>
-    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:18px">
-      <div class="card" style="max-width:420px"><h3>Safety-first operations</h3><p class="muted">Certified HSE processes, modern equipment and trained crew for every voyage.</p></div>
-      <div class="card" style="max-width:420px"><h3>Experienced Team</h3><p class="muted">Decades of combined experience in chartering, marine logistics, and fleet ops.</p></div>
-    </div>
-    <div class="trusted">
-      <img src="public/assets/images/l2.png"><img src="public/assets/images/l3-removebg-preview.png"><img src="public/assets/images/l4.png">
-    </div>
-  </div>
-</section>
+
+
+
+
 
 <!-- ================= NEW STATS SECTION (inserted after Trusted) ================= -->
 <section id="stats" class="container section" data-aos="fade-up">
@@ -549,54 +633,96 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
   </div>
 </section>
 
-<!-- ================= NEW PROJECTS (Swiper) SECTION ================= -->
 <section id="projects" class="section" data-aos="fade-up">
   <div class="container">
     <h2 class="section-title">Recent Projects</h2>
+
     <div class="swiper">
       <div class="swiper-wrapper">
+
+        {% for p in projects %}
         <div class="swiper-slide">
           <div class="card">
-            <div class="banner" style="background-image:url('public/assets/images/off.jpg')"></div>
-            <h3>Offshore Cargo Support</h3>
-            <p class="muted">Comprehensive logistics and vessel coordination for a 3-month offshore operation.</p>
+            <div class="banner" style="background-image:url('{{ p.image.url }}')"></div>
+            <h3>{{ p.title }}</h3>
+            <p class="muted">{{ p.description }}</p>
           </div>
         </div>
+        {% empty %}
         <div class="swiper-slide">
-          <div class="card">
-            <div class="banner" style="background-image:url('public/assets/images/fm.jpg')"></div>
-            <h3>Fleet Expansion</h3>
-            <p class="muted">Assisted with vessel charter and integration of new barges into the active fleet.</p>
-          </div>
+          <p>No projects added yet.</p>
         </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="banner" style="background-image:url('public/assets/images/tug2.jpg')"></div>
-            <h3>Harbor Tug Project</h3>
-            <p class="muted">Delivered timely harbor support operations with optimized fuel and crew scheduling.</p>
-          </div>
-        </div>
+        {% endfor %}
+
       </div>
-      <!-- Optional navigation/pagination -->
+
       <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev" aria-hidden="true"></div>
-      <div class="swiper-button-next" aria-hidden="true"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
+
   </div>
 </section>
 
+
+<div class="trusted-wrapper">
+  <div class="trusted">
+    <img src="{% static 'public/assets/images/l2.png' %}">
+    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
+    <img src="{% static 'public/assets/images/l4.png' %}">
+    <img src="{% static 'public/assets/images/log.png' %}">
+    <img src="{% static 'public/assets/images/new5.png' %}">
+    <img src="{% static 'public/assets/images/ung.png' %}">
+    <!-- DUPLICATE for infinite scroll -->
+    <img src="{% static 'public/assets/images/l2.png' %}">
+    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
+    <img src="{% static 'public/assets/images/l4.png' %}">
+    <img src="{% static 'public/assets/images/log.png' %}">
+    <img src="{% static 'public/assets/images/new5.png' %}">
+    <img src="{% static 'public/assets/images/ung.png' %}">
+  </div>
+</div>
+
+
+
 <section id="contact" class="container section" data-aos="fade-up">
   <h2 class="section-title">Contact Us</h2>
+
   <div class="contact-grid">
-    <div class="card" style="padding:20px"><h3>Get in touch</h3><p class="muted">BizMarine.co.in<br>+91 22 4783 6207<br>Surat, Gujarat</p><p class="muted">Office hours: Mon–Fri 09:30–18:00</p></div>
-    <form class="form card" onsubmit="event.preventDefault(); alert('Message sent (demo)');" style="padding:20px">
-      <input type="text" placeholder="Name" required>
-      <input type="email" placeholder="Email" required>
-      <textarea placeholder="Message" rows="5" required></textarea>
+
+    <!-- LEFT SIDE: Dynamic Contact Info from Admin -->
+    <div class="card" style="padding:20px">
+      <h3>{{ contact.title }}</h3>
+
+      <p class="muted">
+        {{ contact.email }}<br>
+        {{ contact.phone }}<br>
+        {{ contact.location }}
+      </p>
+
+      <p class="muted">
+        {{ contact.office_hours }}
+      </p>
+    </div>
+
+    <!-- RIGHT SIDE: Contact Form (POST + Save to DB) -->
+    <form class="form card" method="POST" style="padding:20px">
+      {% csrf_token %}
+
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="message" placeholder="Message" rows="5" required></textarea>
+
       <button type="submit">Send Message</button>
+
+      {% if success %}
+      <p style="color: var(--accent); margin-top:10px;">Message sent successfully ✔</p>
+      {% endif %}
     </form>
+
   </div>
 </section>
+
 
 <!-- Map Trigger -->
 <div class="map-trigger" data-aos="fade-up">
@@ -674,9 +800,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 L.marker([21.17, 72.83]).addTo(window.map).bindPopup("Biz Marine HQ — Surat");
 L.marker([25.20, 55.27]).addTo(window.map).bindPopup("Dubai Port");
+L.marker([19.07, 72.87]).addTo(window.map).bindPopup("Mumbai Port");
+L.marker([4.05, 9.70]).addTo(window.map).bindPopup("Cameroon Offshore");
+L.marker([-1.29, 36.82]).addTo(window.map).bindPopup("Kenya Operations");
 L.polyline([
   [21.17, 72.83],
-  [25.20, 55.27]
+  [25.20, 55.27],
+  [19.07, 72.87]
 ], {color: '#0b5f8a', weight: 3, opacity: 0.8, dashArray: '5, 6'}).addTo(window.map);
 </script>
 
@@ -746,6 +876,30 @@ L.polyline([
 
   statCards.forEach(c => statObserver.observe(c));
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const scrollBox = document.querySelector("#testimonials .scroll-box");
+  const scrollContent = document.querySelector("#testimonials .scroll-content");
+
+  // Duplicate testimonials for seamless loop
+  scrollContent.innerHTML += scrollContent.innerHTML;
+
+  let scrollPosition = 0;
+
+  function smoothScroll() {
+    scrollPosition += 0.5; // adjust speed (0.3 = slower, 1 = faster)
+    if (scrollPosition >= scrollContent.scrollHeight / 2) {
+      scrollPosition = 0; // reset when half content scrolled
+    }
+    scrollBox.scrollTop = scrollPosition;
+    requestAnimationFrame(smoothScroll);
+  }
+
+  smoothScroll();
+});
+</script>
+
 
 </body>
 </html>
