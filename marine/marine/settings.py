@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-h=5%hrqy21p5yoq2czffg+6m5qi*w(zw(h54z+3sn&32(%(1kn'
 
-DEBUG = False   # PRODUCTION ma OFF rakho
+DEBUG = True   # PRODUCTION ma OFF rakho
 
 ALLOWED_HOSTS = ['*']   # Live server mate ok
 
