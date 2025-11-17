@@ -19,6 +19,34 @@ class HeroSlide(models.Model):
         return f"Slide {self.order}"
 
 
+# ================================
+# NEW MODEL FOR HOMEPAGE 2 (SINGLE VIDEO)
+# ================================
+class HomeTwoHero(models.Model):
+    title = models.CharField(max_length=300)
+    subtitle = models.TextField()
+    card_title = models.CharField(max_length=200)
+    card_text = models.CharField(max_length=300)
+
+    video = models.FileField(upload_to='home2_hero/', blank=True, null=True)
+
+    def __str__(self):
+        return "Homepage 2 Hero Section"
+
+
+class HomeThreeHero(models.Model):
+    title = models.CharField(max_length=300)
+    subtitle = models.TextField()
+    button1_text = models.CharField(max_length=100, blank=True, null=True)
+    button1_link = models.CharField(max_length=300, blank=True, null=True)
+    button2_text = models.CharField(max_length=100, blank=True, null=True)
+    button2_link = models.CharField(max_length=300, blank=True, null=True)
+    video = models.FileField(upload_to='home3_hero/', blank=True, null=True)
+
+    def __str__(self):
+        return "Homepage 3 Hero"
+
+
 
 
 class Service(models.Model):
@@ -30,7 +58,7 @@ class Service(models.Model):
         return self.title
 
 
-class FleetItem(models.Model):   # ← missing hato
+class FleetItem(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
 

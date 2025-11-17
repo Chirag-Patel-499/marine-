@@ -166,6 +166,45 @@ body.light .thumb {
   left: 27px;
 }
 
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px 0;
+  list-style: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  display: none;
+  width: 160px;
+  z-index: 99;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 16px;
+  color: #072033;
+  font-weight: 500;
+}
+
+.dropdown-menu li a:hover {
+  background: #eef7ff;
+  color: var(--accent);
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+
+
 /* responsive */
 @media (max-width: 900px) {
   .topbar {
@@ -465,8 +504,19 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
         <div style="font-size:12px;color:var(--muted)">Offshore | Charter | Fleet Ops</div>
       </div>
     </div>
+
+
     <nav>
       <ul>
+        <li class="dropdown">
+          <a href="#">Home ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="/home1/">Home Page 1</a></li>
+            <li><a href="/home2/">Home Page 2</a></li>
+            <li><a href="/home3/">Home Page 3</a></li>
+          </ul>
+        </li>
+
         <li><a href="#services">Services</a></li>
         <li><a href="#fleet">Fleet</a></li>
         <li><a href="#how">How We Work</a></li>
@@ -474,6 +524,8 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
         <li><a href="#contact" class="cta">Contact</a></li>
       </ul>
     </nav>
+
+
     <div id="themeToggle" class="toggle" title="Switch theme" aria-label="Toggle day night">
       <div class="thumb" id="toggleThumb" role="button" aria-pressed="false">
         <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
