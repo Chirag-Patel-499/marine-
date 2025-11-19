@@ -320,6 +320,44 @@
   #projects .swiper-slide { display: flex; align-items: center; justify-content: center; }
   #projects .card { width: 90%; }
 
+  #testimonials {
+  background: var(--section-bg);
+  color: var(--text-color);
+  padding: 60px 0;
+  text-align: center;
+}
+
+#testimonials .scroll-box {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  max-width: 700px;
+  margin: auto;
+}
+
+#testimonials .scroll-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#testimonials .card {
+  background: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: 0 4px 10px var(--shadow);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#testimonials .muted {
+  color: var(--muted-color);
+  font-size: 14px;
+  display: block;
+  margin-top: 6px;
+}
+
+
   footer { padding: 34px 20px; text-align: center; color: #5d7a87; background: linear-gradient(180deg, #f6fbff, #eef9ff); transition: background .35s, color .35s; }
   .map-trigger { text-align: center; margin: 40px 0; }
   .map-trigger button { background: var(--accent); color: #fff; padding: 10px 18px; border: 0; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 6px 18px rgba(11, 95, 138, 0.2); transition: all 0.3s ease; }
@@ -517,23 +555,31 @@
   </div>
 </section>
 
-<div class="trusted-wrapper" style="margin-top: 3rem;">
-  <div class="trusted">
-    <img src="{% static 'public/assets/images/l2.png' %}">
-    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
-    <img src="{% static 'public/assets/images/l4.png' %}">
-    <img src="{% static 'public/assets/images/log.png' %}">
-    <img src="{% static 'public/assets/images/new5.png' %}">
-    <img src="{% static 'public/assets/images/ung.png' %}">
-    <!-- DUPLICATE for infinite scroll -->
-    <img src="{% static 'public/assets/images/l2.png' %}">
-    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
-    <img src="{% static 'public/assets/images/l4.png' %}">
-    <img src="{% static 'public/assets/images/log.png' %}">
-    <img src="{% static 'public/assets/images/new5.png' %}">
-    <img src="{% static 'public/assets/images/ung.png' %}">
+
+<section id="testimonials" class="section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="section-title">Client Feedback</h2>
+
+    <div class="scroll-box">
+      <div class="scroll-content">
+
+        {% for t in testimonials %}
+        <div class="card">
+          “{{ t.feedback }}”
+          <br>
+          <span class="muted">— {{ t.client_name }}</span>
+        </div>
+        {% empty %}
+        <p>No testimonials added yet.</p>
+        {% endfor %}
+
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
+
+
 
 <section id="stats" class="container section" data-aos="fade-up">
   <h2 class="section-title">Our Achievements</h2>
@@ -581,6 +627,26 @@
     </div>
   </div>
 </section>
+
+<div class="trusted-wrapper" style="margin-top: 3rem;">
+  <div class="trusted">
+    <img src="{% static 'public/assets/images/l2.png' %}">
+    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
+    <img src="{% static 'public/assets/images/l4.png' %}">
+    <img src="{% static 'public/assets/images/log.png' %}">
+    <img src="{% static 'public/assets/images/new5.png' %}">
+    <img src="{% static 'public/assets/images/ung.png' %}">
+    <!-- DUPLICATE for infinite scroll -->
+    <img src="{% static 'public/assets/images/l2.png' %}">
+    <img src="{% static 'public/assets/images/l3-removebg-preview.png' %}">
+    <img src="{% static 'public/assets/images/l4.png' %}">
+    <img src="{% static 'public/assets/images/log.png' %}">
+    <img src="{% static 'public/assets/images/new5.png' %}">
+    <img src="{% static 'public/assets/images/ung.png' %}">
+  </div>
+</div>
+
+
 
 <section id="contact" class="container section" data-aos="fade-up">
   <h2 class="section-title">Contact Us</h2>
@@ -713,6 +779,30 @@
   }, { threshold: 0.5 });
   statCards.forEach(c => statObserver.observe(c));
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const scrollBox = document.querySelector("#testimonials .scroll-box");
+  const scrollContent = document.querySelector("#testimonials .scroll-content");
+
+  // Duplicate testimonials for seamless loop
+  scrollContent.innerHTML += scrollContent.innerHTML;
+
+  let scrollPosition = 0;
+
+  function smoothScroll() {
+    scrollPosition += 0.5; // adjust speed (0.3 = slower, 1 = faster)
+    if (scrollPosition >= scrollContent.scrollHeight / 2) {
+      scrollPosition = 0; // reset when half content scrolled
+    }
+    scrollBox.scrollTop = scrollPosition;
+    requestAnimationFrame(smoothScroll);
+  }
+
+  smoothScroll();
+});
+</script>
+
 
 </body>
 </html>
