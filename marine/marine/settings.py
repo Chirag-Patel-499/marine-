@@ -83,9 +83,7 @@ USE_TZ = True
 
 # ⬇️ STATIC & MEDIA (LIVE SERVER IMPORTANT PART)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',
-]
+
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'   # collectstatic folder
 
