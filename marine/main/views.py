@@ -96,6 +96,8 @@ def home3(request):
             'fleet': FleetItem.objects.all(),
             'projects': Project.objects.all(),
             'contact': ContactInfo.objects.first(),
+            'team': TeamMember.objects.all(),
+            'testimonials': Testimonial.objects.all(),
             'success': True,
         })
 
@@ -112,6 +114,7 @@ def home3(request):
         'fleet': FleetItem.objects.all(),
         'projects': Project.objects.all(),
         'contact': ContactInfo.objects.first(),
+        'testimonials': Testimonial.objects.all(),
     }
 
     return render(request, "home3.html", ctx)
