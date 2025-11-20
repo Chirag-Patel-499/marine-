@@ -546,6 +546,22 @@
   </div>
 </section>
 
+<section id="team" class="container section" data-aos="fade-up">
+  <h2 class="section-title">Meet Our Crew</h2>
+
+  <div class="grid">
+    {% for member in team %}
+      <div class="card">
+        <img src="{{ member.photo.url }}" style="width:100%;border-radius:8px;">
+        <h3>{{ member.name }}</h3>
+        <p class="muted">{{ member.role }}</p>
+      </div>
+    {% empty %}
+      <p>No team members added yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
 <section id="how" class="container section" data-aos="fade-up">
   <h2 class="section-title">How We Work</h2>
   <p style="text-align:center;color:var(--muted);max-width:820px;margin:0 auto 28px">We focus on safety, planning and clear communication.</p>
