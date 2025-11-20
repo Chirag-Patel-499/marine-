@@ -71,47 +71,6 @@
   .desktop-nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; align-items: center; justify-content: center; }
   .desktop-nav a { font-weight: 500; color: inherit; transition: color 0.3s ease; position: relative; font-size: 15px; }
   .desktop-nav a:hover { color: var(--accent); }
-
-  /* Desktop Dropdown Fix (NOT mobile) */
-@media (min-width: 900px) {
-
-  .desktop-nav ul li {
-    position: relative;
-  }
-
-  .desktop-nav .dropdown-menu {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background: white;
-    padding: 10px 0;
-    list-style: none;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    display: none;
-    width: 160px;
-    z-index: 999;
-  }
-
-  .desktop-nav .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-
-  body.dark .desktop-nav .dropdown-menu {
-    background: #0d2233;
-    color: white;
-  }
-}
-
-
-@media (max-width: 900px) {
-  .topbar {
-    margin: 0 !important;
-    width: 100% !important;
-    border-radius: 0 !important;
-  }
-}
-
   
   .cta { background: var(--accent); padding: 8px 18px; border-radius: 10px; color: white !important; font-weight: 600; box-shadow: 0 4px 12px rgba(11, 95, 138, 0.2); transition: transform 0.3s ease; }
   .cta:hover { transform: translateY(-2px); }
@@ -421,6 +380,40 @@
   /* Responsive Tweaks */
   @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } .work-steps { flex-direction: column; } .contact-grid { grid-template-columns: 1fr; } }
   @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .hero-title { font-size: 28px; } }
+
+/* FINAL MOBILE FIX */
+@media (max-width: 900px) {
+
+  /* Remove extra 20px left-right margin */
+  .topbar {
+    margin: 0 !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Container removing 20px padding on mobile */
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* Prevent horizontal shift */
+  body, html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Header full width */
+  header {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+
 </style>
 </head>
 <body>
