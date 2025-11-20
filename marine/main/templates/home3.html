@@ -71,6 +71,33 @@
   .desktop-nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; align-items: center; justify-content: center; }
   .desktop-nav a { font-weight: 500; color: inherit; transition: color 0.3s ease; position: relative; font-size: 15px; }
   .desktop-nav a:hover { color: var(--accent); }
+
+  @media (min-width: 900px) {
+  .desktop-nav ul li { position: relative; }
+
+  .desktop-nav .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 160px;
+    background: white;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 999;
+  }
+
+  .desktop-nav .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  body.dark .desktop-nav .dropdown-menu {
+    background: #0d2233;
+  }
+}
+
+
   
   .cta { background: var(--accent); padding: 8px 18px; border-radius: 10px; color: white !important; font-weight: 600; box-shadow: 0 4px 12px rgba(11, 95, 138, 0.2); transition: transform 0.3s ease; }
   .cta:hover { transform: translateY(-2px); }
@@ -380,40 +407,6 @@
   /* Responsive Tweaks */
   @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } .work-steps { flex-direction: column; } .contact-grid { grid-template-columns: 1fr; } }
   @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .hero-title { font-size: 28px; } }
-
-/* FINAL MOBILE FIX */
-@media (max-width: 900px) {
-
-  /* Remove extra 20px left-right margin */
-  .topbar {
-    margin: 0 !important;
-    width: 100% !important;
-    border-radius: 0 !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Container removing 20px padding on mobile */
-  .container {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  /* Prevent horizontal shift */
-  body, html {
-    overflow-x: hidden !important;
-    width: 100% !important;
-  }
-
-  /* Header full width */
-  header {
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-  }
-}
-
-
 </style>
 </head>
 <body>
@@ -429,7 +422,7 @@
 </div>
 
 <header>
-  <div class="topbar container">
+  <div class="topbar">
     <div class="brand">
       <div class="logo">BM</div>
       <div>
@@ -440,52 +433,23 @@
 
     <nav class="desktop-nav">
       <ul>
-  <li class="dropdown">
-    <a href="#">Home ▾</a>
-    <ul class="dropdown-menu">
-      <li><a href="/home1/">Home Page 1</a></li>
-      <li><a href="/home2/">Home Page 2</a></li>
-      <li><a href="/home3/">Home Page 3</a></li>
-    </ul>
-  </li>
+        <li class="dropdown">
+          <a href="#">Home ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="/home1/">Home Page 1</a></li>
+            <li><a href="/home2/">Home Page 2</a></li>
+            <li><a href="/home3/">Home Page 3</a></li>
+          </ul>
+        </li>
 
-  <li><a href="#services">Services</a></li>
-  <li><a href="#fleet">Fleet</a></li>
-  <li><a href="#how">How We Work</a></li>
-  <li><a href="#trusted">Trusted</a></li>
-  <li><a href="#contact" class="cta">Contact</a></li>
-</ul>
-
+        <li><a href="#services">Services</a></li>
+        <li><a href="#fleet">Fleet</a></li>
+        <li><a href="#how">How We Work</a></li>
+        <li><a href="#trusted">Trusted</a></li>
+        <li><a href="#contact" class="cta">Contact</a></li>
+      </ul>
     </nav>
-
-    <div class="right-controls">
-        <div id="themeToggle" class="marine-toggle" title="Switch theme">
-            <div class="toggle-bg-elements stars">
-                <div class="star-part star-1"></div>
-                <div class="star-part star-2"></div>
-                <div class="star-part star-3"></div>
-            </div>
-            <div class="toggle-bg-elements clouds">
-                <div class="cloud-part cloud-1"></div>
-                <div class="cloud-part cloud-2"></div>
-            </div>
-            
-            <div class="marine-thumb">
-                <svg class="ship-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M20 21c-1.39 0-2.78-.47-4-1.32-2.44 1.71-5.56 1.71-8 0C6.78 20.53 5.39 21 4 21H2v2h2c1.38 0 2.74-.35 4-.99a8.752 8.752 0 0 0 8 0c1.26.64 2.62.99 4 .99h2v-2h-2zM10 10a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2zm9.65 8.35C19 11.7 18.13 11.22 17.28 11c-.06-1.82-1.05-3.32-2.28-4h-1.47c-1.36 0-2.34 1.24-2.37 3.5-.36.35-1.05 1.24-1.16 2.53L9.9 14h-3.9l-1.3 2h14.1l1.5-3h1.65l-2.3-2.65zM17.55 14h-6.5l.5-1.5 1.2-1.3c.15-.16.34-.3.55-.36l.12-.03.13-.01h2.8c.13 0 .26.01.38.04l.27.07c.2.07.38.2.51.36l.44 1.43-.4 1.3z"/>
-                </svg>
-            </div>
-        </div>
-
-        <div class="hamburger" id="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </div>
-
-  </div>
-</header>  
+  
 
 <div class="new-hero" id="hero">
     <video class="hero-bg-video" autoplay muted loop playsinline poster="https://cdn.pixabay.com/video/2022/04/02/112722-695433093_large.mp4">
