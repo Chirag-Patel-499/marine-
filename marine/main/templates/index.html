@@ -204,6 +204,96 @@ body.light .thumb {
 }
 
 
+/* MOBILE MENU OVERLAY */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 15, 25, 0.85);
+  backdrop-filter: blur(6px);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.mobile-menu-overlay.open {
+  display: flex;
+}
+
+.mobile-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.mobile-links li {
+  margin: 12px 0;
+}
+
+.mobile-links a {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  padding: 8px 0;
+}
+
+/* Close menu when clicking */
+.mobile-links a:hover {
+  opacity: 0.7;
+}
+
+
+/* HAMBURGER */
+.hamburger {
+  width: 32px;
+  height: 24px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 300;
+}
+
+.hamburger .bar {
+  height: 3px;
+  width: 100%;
+  background: #072033;
+  border-radius: 4px;
+  transition: 0.3s ease;
+}
+
+/* Hamburger Animation */
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+
+@media (max-width: 900px) {
+
+  /* Hide desktop nav */
+  .desktop-nav {
+    display: none;
+  }
+
+  /* Show mobile hamburger */
+  .hamburger {
+    display: flex;
+  }
+}
+
+
 
 /* responsive */
 @media (max-width: 900px) {
@@ -495,6 +585,18 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
 </head>
 <body>
 
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <ul class="mobile-links">
+    <li><a href="#" class="menu-link">Home</a></li>
+    <li><a href="#services" class="menu-link">Services</a></li>
+    <li><a href="#fleet" class="menu-link">Fleet Operations</a></li>
+    <li><a href="#how" class="menu-link">Our Process</a></li>
+    <li><a href="#trusted" class="menu-link">Trusted</a></li>
+    <li><a href="#contact" class="menu-link">Contact Us</a></li>
+  </ul>
+</div>
+
+
 <header>
   <div class="topbar container">
     <div class="brand">
@@ -531,6 +633,12 @@ body.dark footer{background:linear-gradient(180deg,#04101a,#091b28);color:#98c7e
         <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M464 256c0 0-28.9 48-56 48H104c-27.1 0-56-48-56-48C61 180 110 112 256 112s195 68 208 144z"/>
         </svg>
+      </div>
+        <!-- HAMBURGER BUTTON -->
+      <div class="hamburger" id="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
       </div>
     </div>
   </div>
@@ -954,6 +1062,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<script>
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
+const links = document.querySelectorAll(".menu-link");
+
+hamburger.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
+  hamburger.classList.toggle("active");
+});
+
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    hamburger.classList.remove("active");
+  });
+});
+</script>
 
 </body>
 </html>
