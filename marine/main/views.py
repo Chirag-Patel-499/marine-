@@ -115,6 +115,8 @@ def home3(request):
         'projects': Project.objects.all(),
         'contact': ContactInfo.objects.first(),
         'testimonials': Testimonial.objects.all(),
+        'team': TeamMember.objects.all(),
+
     }
 
     return render(request, "home3.html", ctx)
